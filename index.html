@@ -1,0 +1,148 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Simona Tocci - Esercizio personale: il quiz!</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+        <style>
+            * {
+                margin: 0;
+                padding: 0;
+                font-family: 'Rubik', sans-serif;
+            }
+            .wrapper {
+                width: 50%;
+                margin: 5% auto;
+                max-height: 100vh;
+            }
+            h1 {
+                margin: 6% auto;
+                text-align: center;
+            }
+            .button-container {
+                text-align: center;
+                position: fixed;
+                bottom: 5%;
+                left: 0;
+                right: 0;
+            }
+            #start-btn {
+                text-align: center;
+                width: 320px;
+                height: 60px;
+                border-radius: 20px;
+                border: none;
+                font-size: 1rem;
+                letter-spacing: .07rem;
+                background-color: rebeccapurple;
+                color: #fff;
+                margin: 0 auto;
+            }
+            #score {
+                font-size: 3rem;
+                text-align: center;
+                margin-top: 30%;
+            }
+
+            @media (max-width:576px) {
+                .wrapper {
+                    width: 85%;
+                }
+            }
+        </style>
+    </head>
+    <body>
+
+        <div class="wrapper">
+            <h1>Il quiz sugli Avengers! Quanto sai veramente sulla saga? 10 domande per scoprirlo 🤖</h1>
+            <div class="button-container">
+                <button id="start-btn">Start quiz</button>
+            </div>
+
+            <div id="score"></div>
+        </div>
+        
+
+        <script>
+            var quiz = [
+                {
+                    "question": "Thor is Odin's son",
+                    "answer": true
+                },{
+                    "question": "Loki is a sorcerer",
+                    "answer": true
+                },{
+                    "question": "Thanos was never able to use the infinity stones to accomplish his plan, he was stopped before he could kill half the universe",
+                    "answer": false
+                },{
+                    "question": "Captain Marvel is considered to be one of the strongest characters in the whole Avengers saga",
+                    "answer": true
+                },{
+                    "question": "Iron Man is Tony Stark",
+                    "answer": true
+                },{
+                    "question": "Captain America's nickname is 'Cap'",
+                    "answer": true
+                },{
+                    "question": "Thanos saves his daugther's life when trying to retrieve the Soul Stone",
+                    "answer": false
+                },{
+                    "question": "Peter Quill is a complete normal human",
+                    "answer": false
+                },{
+                    "question": "Grut was able to say 'we are grut'",
+                    "answer": true
+                },{
+                    "question": "Tony Stark will grow old with his wife and daugther after saving the universe from Thanos's Threat",
+                    "answer": false
+                }
+            ]
+
+            var points;
+            var start = document.getElementById("start-btn");
+
+
+            function startQuiz(){
+                points = 0;
+                window.alert("Hello! Before you start, one very important thing! Answer each question by typing 'true' or 'false'! Be careful, every other answer, or even typos, will count as a wrong answer! LET'S GOOOO!")
+                for ( var i = 0; i < quiz.length; i++ ) {
+                    var userAnswer = prompt(quiz[i].question).toLocaleLowerCase();
+                    console.log(userAnswer);
+
+                    if ( userAnswer == "true" ) {
+                        userAnswer = true;
+                    } else if ( userAnswer == "false" ) {
+                        userAnswer = false;
+                    } else if ( userAnswer == '' ) {
+                        userAnswer = "wrong";
+                    }
+
+                    if ( userAnswer == quiz[i].answer ) {
+                        window.alert("Great! Correct :) Go on with the next question!");
+                        points += 1;
+                    } else {
+                        window.alert("Wroooong :-( Doesn't matter, the correct answer was " + quiz[i].answer + "! Go on with the next question!")
+                    }
+                }
+
+                var emoji = '';
+                if ( points < 6 ) {
+                    emoji = "😭";
+                } else if ( points == 6  ) {
+                    emoji = "😬";
+                } else if ( points > 6 && points < 8 ) {
+                    emoji = "😌";
+                } else {
+                    emoji = "🥳";
+                }
+                
+                document.getElementById("score").innerHTML = "Your score is " + points + " points out of " + quiz.length + " " + emoji;
+            }
+            
+            start.addEventListener("click", startQuiz);            
+            
+        </script>
+    </body>
+</html>
